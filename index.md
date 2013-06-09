@@ -7,5 +7,5 @@ tagline: web dev
 
 ## older posts
 {% for post in site.posts %}
-{{ post.date | date_to_string }} &raquo; [{{ post.title }}]({{ BASE_PATH }}{{ post.url }})
+{% if post != site.posts.first %}{{ post.date | date_to_string }} &raquo; [{{ post.title }}]({{ BASE_PATH }}{{ post.url }}){% endif %}
 {% endfor %}
