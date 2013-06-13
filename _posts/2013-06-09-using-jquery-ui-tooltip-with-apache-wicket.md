@@ -28,7 +28,11 @@ Using the jQuery UI tooltip widget, you can create tooltips like this:
   });
 </script>
 {% endhighlight %}
-What is there to integrate into Apache Wicket? First of all, you could be wanting to use Wickets JavaScript event system instead of using jQuery's directly. It would also be nice provide the selector, used to apply the widget to an HTML element, dynamically. Also, if there are multiple elements you want to apply the tooltip widget to and the tooltips should all look and behave the same way (that means, they share the same configuration), you will not want to have that JavaScript **for each element**, but instead just once. In the end you want to provide (rich) content for each tooltip. [JQueryUiTooltip](https://github.com/wicketstuff/core/blob/master/jdk-1.6-parent/jwicket-parent/jwicket-ui/jwicket-ui-tooltip/src/main/java/org/wicketstuff/jwicket/ui/tooltip/JQueryUiTooltip.java) generates the JavaScript, that does it all.
+[JQueryUiTooltip](https://github.com/wicketstuff/core/blob/master/jdk-1.6-parent/jwicket-parent/jwicket-ui/jwicket-ui-tooltip/src/main/java/org/wicketstuff/jwicket/ui/tooltip/JQueryUiTooltip.java) is a Wicket Behavior that generates the JavaScript neccessary to create tooltips. It offers an API to configure the tooltip(s). Here are some features:
+* the generated JS uses Wickets JavaScript event system instead of using jQuery's directly
+* the default selector is the markup id of the component, the JQueryUiTooltip was added to, or `document` when it was added to a page
+* one tooltip configuration for multiple elements having tooltip: add JQueryUiTooltip to the page and/or provide a custom jQuery selector, then just add **JQueryUiTooltipContent** to these components
+* **JQueryUiTooltipContent** allows you to provide markup as tooltip content
 
 ## Example
 {% highlight java %}
@@ -56,6 +60,6 @@ Wicket.Event.add(window, "domready", function(event) {
   $('.with-tooltip').tooltip({items:'.with-tooltip'}, ...);
 });
 {% endhighlight %}
-**JQueryUiTooltip** allows you to use rich tooltip content by putting dynamic content into the **data-tooltip** attribute of the element having a tooltip. You can provide the content as **String** or even as a **Wicket Component**.
+**JQueryUiTooltipContent** allows you to use rich tooltip content by putting dynamic content into the **data-tooltip** attribute of the element having a tooltip. You can provide the content as **String** or even as a **Wicket Component**.
 
 More examples can be found [on the wiki page](https://github.com/wicketstuff/core/wiki/jWicket-UI-Tooltip#usage).
