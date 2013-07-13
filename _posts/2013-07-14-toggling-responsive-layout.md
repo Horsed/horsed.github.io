@@ -12,7 +12,7 @@ Implementing a responsive layout means dealing with multiple screen resolutions 
 * complex forms which are considered too tedious to fill out on a small touch device
 To deal with that, some companies/sites offer links to a desktop version of a particular page or the homepage. But how to do that, when making use of responsive design techniques?
 
-There is a nice solution for switching between the desktop and mobile layout dynamically, even without a page reload, since all layouts already lie in the page. Since RWD [emphasizes a mobile first approach|http://en.wikipedia.org/wiki/Responsive_web_design#Mobile_first.2C_unobtrusive_JavaScript.2C_and_progressive_enhancement], a responsive layout is responsive by default. One would have to switch to a fixed/desktop layout.
+There is a nice solution for switching between the desktop and mobile layout dynamically, even without a page reload, since all layouts already lie in the page. Since RWD [emphasizes a mobile first approach](http://en.wikipedia.org/wiki/Responsive_web_design#Mobile_first.2C_unobtrusive_JavaScript.2C_and_progressive_enhancement), a responsive layout is responsive by default. One would have to switch to a fixed/desktop layout.
 Consider the following responsive CSS snippet:
 
 {% highlight css %}
