@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "Using jQuery UI tooltip with Apache Wicket"
-description: "There are several integrations of tooltips based on JavaScript libraries in [wicketstuffs](http://wicketstuff.org) sub project [jWicket](https://github.com/wicketstuff/core/tree/master/jdk-1.6-parent/jwicket-parent/jwicket-tooltip). I [contributed](https://github.com/wicketstuff/core/wiki/jWicket-UI-Tooltip) an integration of the [jQuery UI tooltip widget](http://api.jqueryui.com/tooltip/) to it."
+description: There are several integrations of tooltips based on JavaScript libraries in the wicketstuff sub project jWicket. I contributed jWicket-UI-Tooltip to it, an integration of the jQuery UI tooltip widget.
 category: 
 tags: webdev wicket behavior jquery jqueryui jwicket wicketstuff
 ---
 {% include JB/setup %}
 
-The snapshot release is available through Maven like this:
+You can find it [here](https://github.com/wicketstuff/core/wiki/jWicket-UI-Tooltip). The snapshot release is available through Maven like this:
 {% highlight xml %}
 <dependency>
   <groupId>org.wicketstuff</groupId>
@@ -63,3 +63,9 @@ Wicket.Event.add(window, "domready", function(event) {
 **JQueryUiTooltipContent** allows you to use rich tooltip content by putting dynamic content into the **data-tooltip** attribute of the element having a tooltip. You can provide the content as **String** or even as a **Wicket Component**.
 
 More examples can be found [on the wiki page](https://github.com/wicketstuff/core/wiki/jWicket-UI-Tooltip#usage).
+
+Links:
+* [wicketstuff](http://wicketstuff.org)
+* [jWicket](https://github.com/wicketstuff/core/tree/master/jdk-1.6-parent/jwicket-parent/jwicket-tooltip)
+* [jWicket-UI-Tooltip](https://github.com/wicketstuff/core/wiki/jWicket-UI-Tooltip)
+* [jQuery UI tooltip widget](http://api.jqueryui.com/tooltip/)
