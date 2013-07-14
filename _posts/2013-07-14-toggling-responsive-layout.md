@@ -27,13 +27,13 @@ Consider the following responsive CSS snippet:
 }
 {% endhighlight %}
 
-An element with a CSS class {% container %} should have a fixed {% width %} of 820px on desktop screens but should have a relative {% width %} when rendered on a smaller screen. As you can see, the 2nd CSS selector matches only elements with CSS classes {% container %} and {% flexible %}. Here is the corresponding markup:
+An element with a CSS class ```container``` should have a fixed ```width``` of 820px on desktop screens but should have a relative ```width``` when rendered on a smaller screen. As you can see, the 2nd CSS selector matches only elements with CSS classes ```container``` and ```flexible```. Here is the corresponding markup:
 
 {% highlight html %}
 <div class="container flexible x">lorem ipsum...</div>
 {% endhighlight %}
 
-The responsiveness defined in the CSS snippet is based on the logical conjunction of {% (max-width: 769px) %} and {% .flexible %}. To turn off the flexibile {% width %} one just needs to remove the CSS class {% flexible %} with a little bit of JavaScript/jQuery:
+The responsiveness defined in the CSS snippet is based on the logical conjunction of ```(max-width: 769px)``` and ```.flexible```. To turn off the flexibile ```width``` one just needs to remove the CSS class ```flexible``` with a little bit of JavaScript/jQuery:
 
 {% highlight javascript %}
 var switchToFixedLayout = function() {
@@ -45,5 +45,5 @@ var switchToFixedLayout = function() {
 $('#link-to-desktop-version').click(switchToFixedLayout);
 {% endhighlight %}
 
-{% switchToFixedLayout %} removes the CSS class {% flexible %} from all elements with the CSS class {% f %}. {% f %} is a marker for all elements that need to be considered for the responsiveness.
-Now users can switch to a desktop layout by clicking the corresponding link. With a little more jQuery the link could even toggle {% flexible %}. One could furthermore save the state in the URL fragment, so the user doesn't switch back to the flexible layout by reloading the page.
+{% switchToFixedLayout %} removes the CSS class ```flexible``` from all elements with the CSS class ```f```. ```f``` is a marker for all elements that need to be considered for the responsiveness.
+Now users can switch to a desktop layout by clicking the corresponding link. With a little more jQuery the link could even toggle ```flexible```. One could furthermore save the state in the URL fragment, so the user doesn't switch back to the flexible layout by reloading the page.
