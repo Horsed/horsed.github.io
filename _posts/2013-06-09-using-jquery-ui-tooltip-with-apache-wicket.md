@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "Using jQuery UI tooltip with Apache Wicket"
-description: ""
+description: "There are several integrations of tooltips based on JavaScript libraries in [wicketstuffs](http://wicketstuff.org) sub project [jWicket](https://github.com/wicketstuff/core/tree/master/jdk-1.6-parent/jwicket-parent/jwicket-tooltip). I [contributed](https://github.com/wicketstuff/core/wiki/jWicket-UI-Tooltip) an integration of the [jQuery UI tooltip widget](http://api.jqueryui.com/tooltip/) to it."
 category: 
 tags: webdev wicket behavior jquery jqueryui jwicket wicketstuff
 ---
 {% include JB/setup %}
 
-There are several integrations of tooltips based on JavaScript libraries in [wicketstuffs](http://wicketstuff.org) sub project [jWicket](https://github.com/wicketstuff/core/tree/master/jdk-1.6-parent/jwicket-parent/jwicket-tooltip). I [contributed](https://github.com/wicketstuff/core/wiki/jWicket-UI-Tooltip) an integration of the [jQuery UI tooltip widget](http://api.jqueryui.com/tooltip/) to it. The snapshot release is available through Maven like this:
+The snapshot release is available through Maven like this:
 {% highlight xml %}
 <dependency>
   <groupId>org.wicketstuff</groupId>
