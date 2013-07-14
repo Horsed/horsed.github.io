@@ -7,8 +7,6 @@ tags: webdev responsivedesign javascript mobile
 ---
 {% include JB/setup %}
 
-Implementing a responsive layout means dealing with multiple screen resolutions and devices in order to provide users an optimal viewing experience. One therefore serves all CSS and markup for all provided viewports within the same page. However, there are some cases where one cannot or doesn't want to provide a mobile friendly layout. To deal with that, some companies/sites offer links to a desktop version of a particular page or the homepage. But how to do that, when making use of responsive design techniques?
-
 There is a nice solution for switching between the desktop and mobile layout dynamically, even without a page reload, since all layouts already lie in the page. Since RWD [emphasizes a mobile first approach](http://en.wikipedia.org/wiki/Responsive_web_design#Mobile_first.2C_unobtrusive_JavaScript.2C_and_progressive_enhancement), a responsive layout is responsive by default. One would have to switch to a fixed/desktop layout.
 Consider the following responsive CSS snippet:
 
