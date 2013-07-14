@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "Wicket AjaxLink that should scroll the page to the top"
-description: ""
+description: "I recently came across a browser quirk: A Wicket AjaxLink was supposed to scroll the page to the top after it was clicked. But it didn't..."
 category:
 tags: webdev wicket ajax jquery
 ---
 {% include JB/setup %}
 
-I recently came across a browser quirk: A Wicket AjaxLink was supposed to scroll the page to the top after it was clicked. Here is the code:
+Here is the code:
 {% highlight java %}
 add(new AjaxLink<Void>("link") {
   @Override
