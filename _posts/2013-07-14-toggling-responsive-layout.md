@@ -1,7 +1,10 @@
 ---
 layout: post
 title: "Toggling responsive layout"
-description: ""
+description: "Implementing a responsive layout means dealing with multiple screen resolutions and devices in order to provide users an optimal viewing experience. One therefore serves all CSS and markup for all provided viewports within the same page. However, there are some cases where one cannot or doesn't want to provide a mobile friendly layout:
+* not enough space for ads/lead generating components 
+* complex forms which are considered too tedious to fill out on a small touch device
+To deal with that, some companies/sites offer links to a desktop version of a particular page or the homepage. But how to do that, when making use of responsive design techniques?"
 category:
 tags: webdev responsivedesign javascript mobile
 ---
