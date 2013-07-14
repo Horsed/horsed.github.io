@@ -3,7 +3,7 @@ layout: post
 title: "Toggling responsive layout"
 description: ""
 category:
-tags: webdev response-design javascript mobile
+tags: webdev responsivedesign javascript mobile
 ---
 {% include JB/setup %}
 
