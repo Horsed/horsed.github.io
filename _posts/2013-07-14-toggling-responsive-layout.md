@@ -25,14 +25,14 @@ Consider the following responsive CSS snippet:
 An element with a CSS class ```container``` should have a fixed ```width``` of 820px on desktop screens but should have a relative ```width``` when rendered on a smaller screen. As you can see, the 2nd CSS selector matches only elements with CSS classes ```container``` and ```flexible```. Here is the corresponding markup:
 
 {% highlight html %}
-<div class="container flexible x">lorem ipsum...</div>
+<div class="container flexible f">lorem ipsum...</div>
 {% endhighlight %}
 
 The responsiveness defined in the CSS snippet is based on the logical conjunction of ```(max-width: 769px)``` and ```.flexible```. To turn off the flexibile ```width``` one just needs to remove the CSS class ```flexible``` with a little bit of JavaScript/jQuery:
 
 {% highlight javascript %}
 $('#link-to-desktop-version').click(function() {
-  $('.x').each(function(index) {
+  $('.f').each(function(index) {
     $(this).removeClass('flexible');
   });
 });
