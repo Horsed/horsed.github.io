@@ -28,7 +28,7 @@ An element with a CSS class ```container``` should have a fixed ```width``` of 8
 <div class="container flexible f">lorem ipsum...</div>
 {% endhighlight %}
 
-The responsiveness defined in the CSS snippet is based on the logical conjunction of ```(max-width: 769px)``` and ```.flexible```. To turn off the flexibile ```width``` one just needs to remove the CSS class ```flexible``` with a little bit of JavaScript/jQuery:
+The responsiveness defined in the CSS snippet is based on the logical conjunction of ```(max-width: 820px)``` and ```.flexible```. To turn off the flexibile ```width``` one just needs to remove the CSS class ```flexible``` with a little bit of JavaScript/jQuery:
 
 {% highlight javascript %}
 $('#link-to-desktop-version').click(function() {
