@@ -11,13 +11,13 @@ There is a nice solution for switching between the desktop and mobile layout dyn
 Consider the following responsive CSS snippet:
 
 {% highlight css %}
-.container { /* desktop */
-  width: 820px;
+.container {
+  width: 100%;
   margin: 0 auto;
 }
-@media only screen and (max-width: 769px) { /* small than desktop */  
+@media only screen and (min-width: 820px) {
   .container.flexible {
-    width: 100%;
+    width: 820px;
   }
 }
 {% endhighlight %}
@@ -32,7 +32,7 @@ The responsiveness defined in the CSS snippet is based on the logical conjunctio
 
 {% highlight javascript %}
 var switchToFixedLayout = function() {
-  $('.f').each(function(index) {
+  $('.x').each(function(index) {
     $(this).removeClass('flexible');
   });
 };
