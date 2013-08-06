@@ -38,5 +38,5 @@ $('#link-to-desktop-version').click(function() {
 });
 {% endhighlight %}
 
-```switchToFixedLayout``` removes the CSS class ```flexible``` from all elements with the CSS class ```f```. ```f``` is a marker for all elements that need to be considered for the responsiveness.
-Now users can switch to a desktop layout by clicking the corresponding link. With a little more jQuery the link could even toggle ```flexible```. One could furthermore save the state in the URL fragment, so the user doesn't switch back to the flexible layout by reloading the page.
+The click handler removes the CSS class ```flexible``` from all elements with the CSS class ```f```. ```f``` is a marker for all elements that need to be considered for the responsiveness.
+Now users can switch to a desktop layout by clicking the corresponding link. With a little more jQuery the link could even toggle back ```flexible```. One could furthermore save the state in the URL fragment or in a cookies, so the user doesn't switch back to the flexible layout by reloading the page.
