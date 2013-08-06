@@ -31,13 +31,11 @@ An element with a CSS class ```container``` should have a fixed ```width``` of 8
 The responsiveness defined in the CSS snippet is based on the logical conjunction of ```(max-width: 769px)``` and ```.flexible```. To turn off the flexibile ```width``` one just needs to remove the CSS class ```flexible``` with a little bit of JavaScript/jQuery:
 
 {% highlight javascript %}
-var switchToFixedLayout = function() {
+$('#link-to-desktop-version').click(function() {
   $('.x').each(function(index) {
     $(this).removeClass('flexible');
   });
-};
-
-$('#link-to-desktop-version').click(switchToFixedLayout);
+});
 {% endhighlight %}
 
 ```switchToFixedLayout``` removes the CSS class ```flexible``` from all elements with the CSS class ```f```. ```f``` is a marker for all elements that need to be considered for the responsiveness.
