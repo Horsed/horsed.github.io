@@ -12,12 +12,12 @@ Consider the following responsive CSS snippet:
 
 {% highlight css %}
 .container {
-  width: 100%;
+  width: 820px;
   margin: 0 auto;
 }
-@media only screen and (min-width: 820px) {
+@media only screen and (max-width: 820px) {
   .container.flexible {
-    width: 820px;
+    width: 100%;
   }
 }
 {% endhighlight %}
