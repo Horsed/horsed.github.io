@@ -35,7 +35,7 @@ function buildTables(tgContext, fgContext) {
 What this function does is, it creates a template for a table, puts it into two DOM elements (```#tg``` and ```#fg```), creates a template for a table row and append it to the table bodies for each array element given by ```tgContext``` and ```fgContext```.
 I wanted to make this as declarative as possible but I don't think the above function achieves that goal. In fact, the multiple levels of abstraction throughout the entire function destroy readability. Let's make this cleaner.
 
-First we'll try to extract some methods (I don't even have unit tests for this although it would have been pretty easy to set some up since the whole project was written using [jsbin](http://jsbin.com). Let's pretend I do have tests ;-)).
+First we'll try to extract some methods. Let's pretend I do have tests ;-).
 
 {% highlight javascript %}
 function buildTables(tgContext, fgContext) {  
