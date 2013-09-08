@@ -19,4 +19,4 @@ TypeError: 'undefined' is not a function (evaluating 'element('form').submit()')
 Remember: It's the last mentioned function that's ```undefined```! So in this case it is the ```submit``` function.
 
 ## ```binding('binding-name')``` doesn't work with two-way-databindings
-Calling ```binding()``` on a two-way-databinding (like ```ng-model="binding-name"```) throws an error message that says ```Binding selector 'binding-name' did not match.```. I don't know the reason. Maybe I'll get an explanation on my (stackoverflow question)[http://stackoverflow.com/questions/18630723/why-doesnt-binding-find-a-two-way-binding-in-an-e2e-test].
+Calling ```binding()``` on a two-way-databinding (like ```ng-model="binding-name"```) throws an error message that says ```Binding selector 'binding-name' did not match.```. I don't know the reason. Maybe I'll get an explanation on my [stackoverflow question](http://stackoverflow.com/questions/18630723/why-doesnt-binding-find-a-two-way-binding-in-an-e2e-test).
