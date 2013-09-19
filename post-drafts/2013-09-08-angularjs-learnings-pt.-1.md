@@ -58,7 +58,7 @@ angular.module('phvApp').controller('MainCtrl', ['$scope', '$routeParams', funct
 {% endhighlight %}
 
 ## Two-way-databinding automatically generates a model if it does not exist
-Not just useful:
+Not just useful, especially when debugging:
 
 {% highlight javascript %}
 ...
