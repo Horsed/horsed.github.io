@@ -32,7 +32,7 @@ angular.scenario.matcher('toBeReallyReallyTrue', function() {
 {% endhighlight %}
 
 ## Using [ngmin](https://github.com/btford/ngmin): Know the conventions!
-If you're using [yeoman](http://yeoman.io) to generate your AngularJS project you're probably making use of [grunt](http://gruntjs.com) to build everything.
+If you're using [yeoman](http://yeoman.io) to generate your AngularJS project you're probably making use of [grunt](http://gruntjs.com) to build everything. The default build configuration runs ````ngmin``` for pre-minification of your script files.
 
 I defined a controller by hand like this:
 
