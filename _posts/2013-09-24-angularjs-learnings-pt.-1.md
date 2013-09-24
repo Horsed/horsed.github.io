@@ -2,7 +2,7 @@
 layout: post
 title: "AngularJS learnings pt. 1"
 description: "Some details to know about when developing in AngularJS"
-category: [learning-angularjs]
+category: [angularjs]
 tags: webdev angularjs
 ---
 {% include JB/setup %}
