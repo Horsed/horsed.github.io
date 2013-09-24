@@ -54,20 +54,20 @@
 
       <span class="content pull-left">
         {{ content }}
+      	<hr>
+	      <footer>
+	        <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}
+	          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+	          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+	        </p>
+	      </footer>
       </span>
-      <hr>
-      <footer>
-        <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}
-          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
-          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
-        </p>
-      </footer>
 
+	    <span class="content pull-right">
+	    	<a href="http://horsed.github.io/categories.html#angularjs"></a>Learning AngularJS</a>
+	    </span>
     </div>
     
-    <span class="content pull-right">
-    	<a href="http://horsed.github.io/categories.html#angularjs"></a>Learning AngularJS</a>
-    </span>
 
     {% include JB/analytics %}
   </body>
