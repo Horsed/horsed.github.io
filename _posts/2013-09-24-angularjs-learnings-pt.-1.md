@@ -71,12 +71,11 @@ $scope.firstname = 'Alice';
 <input type="text" ng-model="firstName" />
 {% endhighlight %}
 
-### Trigger jQuery events in a custom dsl [source](https://github.com/angular/angular.js/pull/752)
-That one was hard. I wanted to e2e test a directive which shows and hides an element when hovering over another element. I wrote a custom dsl to trigger the ```mouseover``` event on a given element. But the event didn't seem to fire. Here is the code:
+### Trigger jQuery events in a custom dsl ([source](https://github.com/angular/angular.js/pull/752))
+I wanted to e2e test a directive which shows and hides another element when hovering over the directive's element. I wrote a custom dsl to trigger the ```mouseover``` event on a given element. But the event didn't seem to fire inside the e2e tests although it worked in the browser. Here is the code:
 
 {%highlight html %}
 <span class="master" show-hide=".slave">...</span>
-
 <span class="slave">...</span>
 {% endhighlight %}
 
@@ -91,7 +90,9 @@ angular.scenario.dsl('mouseover', function() {
     });
   };
 });
+
 ...
+
 it('should show slave', function() {
   expect(element('.slave').css('display')).toBe('none');
   
@@ -101,7 +102,7 @@ it('should show slave', function() {
 });
 {% endhighlight %}
 
-The problem is with using jQuery in the custom dsl. What I understood so far is that angular's Scenario Runner runs your app in an iFrame which lies inside a main frame. The main frame has jQuery available, as the Scenario Runner depends on it. So I thought there were no restrictions in using jQuery in a custom dsl. However, the outer jQuery instance cannot bubble up events inside the DOM of the iFrame. So calling ```trigger``` had no effect inside the iFrame.
+The problem is with using jQuery in the custom dsl. What I understood so far is that angular's Scenario Runner runs your app in an iFrame which lies inside a main frame. The main frame has jQuery available, as the Scenario Runner depends on it. So I thought there were no restrictions in using jQuery in a custom dsl. However, the outer jQuery instance cannot bubble up events inside the DOM of the iFrame. So calling ```trigger``` with my custom dsl had no effect inside the iFrame.
 
 Here is what made it work:
 
