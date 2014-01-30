@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Writing a custom Jasmine matcher for your e2e tests - horsed.github.io
+    </title>
+    <link rel="alternate" href="http://horsed.github.io/feed.xml" type="application/rss+xml" title="">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body class="article-detail">
+    <header class="header">
+      <div class="content-wrap">
+        <h1>Writing a custom Jasmine matcher for your e2e tests</h1>
+        <p class="author">Written by <span class="author"><a href="mailto:undefined">Martin Knopf</a></span>
+        </p>
+      </div>
+    </header>
+    <div id="content">
+      <div class="content-wrap">
+        <article class="article">
+          <section class="content"><p>How to write a custom Jasmine matcher for yout AngularJS e2e&nbsp;tests</p>
+<p>Writing custom matchers in e2e tests differs from the standard <a href="https://github.com/pivotal/jasmine/wiki/Matchers#writing-new-matchers">Jasmine way</a>.</p>
+<pre><code class="lang-javascript">angular.scenario.matcher(<span class="string">'toBeReallyReallyTrue'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+  <span class="keyword">return</span> <span class="keyword">this</span>.actual === <span class="literal">true</span>;
+});
+</code></pre>
+<p>You can read more about this <a href="https://groups.google.com/forum/#!msg/angular/lcFXW8uv_P8/3gekqCrzSnEJ">here</a>.</p>
+</section>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="content-wrap">
+        <div class="nav"><a href="/">« Full blog</a></div>
+        <section class="about">
+        </section>
+        <section class="copy">
+          <p>&copy; 2014 Martin Knopf &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a>
+          </p>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>

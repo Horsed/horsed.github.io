@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Two-way-databinding automatically creates a model if it does not exist - horsed.github.io
+    </title>
+    <link rel="alternate" href="http://horsed.github.io/feed.xml" type="application/rss+xml" title="">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body class="article-detail">
+    <header class="header">
+      <div class="content-wrap">
+        <h1>Two-way-databinding automatically creates a model if it does not exist</h1>
+        <p class="author">Written by <span class="author"><a href="mailto:undefined">Martin Knopf</a></span>
+        </p>
+      </div>
+    </header>
+    <div id="content">
+      <div class="content-wrap">
+        <article class="article">
+          <section class="content"><p>Did you know that a two-way-databinding will automatically create a model on the scope when you provide a non existing&nbsp;one?</p>
+<p>This is can be tricky, especially when&nbsp;debugging:</p>
+<pre><code class="lang-javascript">...
+$scope.firstname = <span class="string">'Alice'</span>;
+...
+</code></pre>
+<pre><code class="lang-html"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">ng-model</span>=<span class="value">"firstName"</span> /&gt;</span>
+</code></pre>
+<p>Notice that there is a typo in&nbsp;firstname/firstName.</p>
+</section>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="content-wrap">
+        <div class="nav"><a href="/">« Full blog</a></div>
+        <section class="about">
+        </section>
+        <section class="copy">
+          <p>&copy; 2014 Martin Knopf &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a>
+          </p>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>

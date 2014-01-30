@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Trigger jQuery events in a custom dsl - horsed.github.io
+    </title>
+    <link rel="alternate" href="http://horsed.github.io/feed.xml" type="application/rss+xml" title="">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body class="article-detail">
+    <header class="header">
+      <div class="content-wrap">
+        <h1>Trigger jQuery events in a custom dsl</h1>
+        <p class="author">Written by <span class="author"><a href="mailto:undefined">Martin Knopf</a></span>
+        </p>
+      </div>
+    </header>
+    <div id="content">
+      <div class="content-wrap">
+        <article class="article">
+          <section class="content"><p>When developing dynamic frontends with jQuery you will most likely be making use of events (e.g. mouseover). In AngularJS this event handling code usually lies in directives. When it comes to testing these directives in e2e tests, you may want to trigger some of these events. Angular uses it’s jqLite for e2e test where you might be looking first for some events you can trigger. But since jqLite is only a subset of jquery it doesn’t provide all events supported by&nbsp;jquery.</p>
+<p>I wanted to e2e test a directive which shows and hides another element when hovering over the directive’s element. I wrote a custom dsl to trigger the <code>mouseover</code> event on a given element. But the event didn’t seem to fire inside the e2e tests although it worked in the browser. Here is the&nbsp;code:</p>
+<pre><code class="lang-html"><span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"master"</span> <span class="attribute">show-hide</span>=<span class="value">".slave"</span>&gt;</span>...<span class="tag">&lt;/<span class="title">span</span>&gt;</span>
+<span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"slave"</span>&gt;</span>...<span class="tag">&lt;/<span class="title">span</span>&gt;</span>
+</code></pre>
+<p>The e2e test looked like&nbsp;this:</p>
+<pre><code class="lang-javascript">angular.scenario.dsl(<span class="string">'mouseover'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(selector)</span> {</span>
+    <span class="keyword">return</span> <span class="keyword">this</span>.addFutureAction(<span class="string">'Calling mouseover of given element'</span>, <span class="function"><span class="keyword">function</span><span class="params">($window, $document, done)</span> {</span>
+      $document.find(selector).trigger(<span class="string">'mouseover'</span>);
+      done();
+    });
+  };
+});
+
+...
+
+it(<span class="string">'should show slave'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+  expect(element(<span class="string">'.slave'</span>).css(<span class="string">'display'</span>)).toBe(<span class="string">'none'</span>);
+
+  mouseover(<span class="string">'.master'</span>);
+
+  expect(element(<span class="string">'.slave'</span>).css(<span class="string">'display'</span>)).not().toBe(<span class="string">'none'</span>);
+});
+</code></pre>
+<p>The problem is with using jQuery in the custom dsl. What I understood so far is that angular’s Scenario Runner runs your app in an iFrame which lies inside a main frame. The main frame has jQuery available, as the Scenario Runner depends on it. So I thought there were no restrictions in using jQuery in a custom dsl. However, the outer jQuery instance cannot bubble up events inside the <span class="caps">DOM</span> of the iFrame. So calling <code>trigger</code> with my custom dsl had no effect inside the&nbsp;iFrame.</p>
+<p>Here is what made it&nbsp;work:</p>
+<pre><code class="lang-javascript">angular.scenario.dsl(<span class="string">'mouseover'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(selector)</span> {</span>
+    <span class="keyword">return</span> <span class="keyword">this</span>.addFutureAction(<span class="string">'Calling mouseover of given element'</span>, <span class="function"><span class="keyword">function</span><span class="params">($window, $document, done)</span> {</span>
+      <span class="keyword">var</span> elements = $window.angular.element($document.elements());
+      elements.trigger(<span class="string">'mouseover'</span>);
+      done();
+    });
+  };
+});
+</code></pre>
+<p>You can find some explanatory code <a href="https://github.com/angular/angular.js/pull/752">here</a>.</p>
+</section>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="content-wrap">
+        <div class="nav"><a href="/">« Full blog</a></div>
+        <section class="about">
+        </section>
+        <section class="copy">
+          <p>&copy; 2014 Martin Knopf &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a>
+          </p>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>

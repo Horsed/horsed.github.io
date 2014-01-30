@@ -1,0 +1,26 @@
+{
+  "locals": {
+    "url": "http://horsed.github.io",
+    "name": "horsed.github.io",
+    "owner": "Martin Knopf",
+    "description": ""
+  },
+  "plugins": [
+    "./plugins/paginator.coffee"
+  ],
+  "require": {
+    "moment": "moment",
+    "_": "underscore",
+    "typogr": "typogr"
+  },
+  "jade": {
+    "pretty": true
+  },
+  "markdown": {
+    "smartLists": true,
+    "smartypants": true
+  },
+  "paginator": {
+    "perPage": 3
+  }
+}
