@@ -4,16 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
-    <title>Fetching bower packages from a website - horsed.github.io
+    <title>Fetching bower packages via a RESTful API - horsed.github.io
     </title>
-    <link rel="alternate" href="http://horsed.github.io/feed.xml" type="application/rss+xml" title="">
+    <link rel="alternate" href="http://horsed.github.io/feed.xml" type="application/rss+xml" title="Tooling, learning">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
     <link rel="stylesheet" href="/css/main.css">
   </head>
   <body class="article-detail">
     <header class="header">
       <div class="content-wrap">
-        <h1>Fetching bower packages from a website</h1>
+        <h1>Fetching bower packages via a RESTful API</h1>
         <p class="author">Written by <span class="author"><a href="mailto:undefined">Martin Knopf</a></span>
         </p>
       </div>
@@ -21,7 +21,41 @@
     <div id="content">
       <div class="content-wrap">
         <article class="article">
-          <section class="content"><p>bower&nbsp;heroku</p>
+          <section class="content"><p>When starting to use <a href="http://angularjs.org/">AngularJS</a> at work, I soon had to realize, that using <a href="http://bower.io/">Bower</a> might not be an option. Bower fetches components from <a href="https://github.com/">GitHub</a> with <code>SSH</code>, which got blocked by the corporate proxy. If Bower was able to fetch with <code>HTTPS</code>, everything would have been fine. Of course, easing the security restriction was not an option :-)<br>Instead of arguing about the proxy and why Bower didn’t seem to have a proxy configuration, I quickly hacked together a simple Node webapp to fetch Bower components with. It runs on <a href="https://www.heroku.com/">heroku</a>. The idea was to <code>curl</code> a component from that webapp, which then actually fetches the component via <a href="http://bower.io/#programmatic-api">Bower’s <span class="caps">API</span></a> and zips it. I curled and unziped via a shell script. Pretty simple. The only thing missing was automatically editing the <code>bower.json</code>, which doesn’t seem too difficult.<br>The hardest part about that webapp was making it failsafe. The earliest versions crashed when Bower threw an error (like it does when you request a component that doesn’t exist) and I’m not sure why, but I wasn’t able to catch those errors. I learned about Node’s <a href="http://nodejs.org/api/domain.html">domain module</a> which was kind of hard figure out at first but really helped with the error handling.<br>I’m not using the app today anymore, nor am I coding on it. It was just one of a few small projects I started to do something that is new and interesting at least for 2 or 3 evenings.<br>Anyway, here is some code about that tricky error handling with nested <code>domains</code>:</p>
+<pre><code class="lang-javascript"><span class="keyword">var</span> search = bower.commands.search(packageName, {});
+
+<span class="keyword">var</span> d = domain.create();
+d.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span><span class="params">(err)</span> {</span>
+  errFn(err);
+});
+d.add(search);
+
+d.run(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+  search.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(results)</span> {</span>
+    <span class="keyword">if</span>(results.length &gt; <span class="number">0</span>) {
+      <span class="keyword">var</span> install = bower.commands.install(
+        packageName,
+        {save:<span class="literal">false</span>},
+        {cwd: <span class="string">"output"</span>, directory: <span class="string">"bower_components"</span>});
+
+      <span class="keyword">var</span> d = domain.create();
+      d.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span><span class="params">(err)</span> {</span>
+        errFn(err);
+      });
+      d.add(install);
+
+      d.run(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+        install.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span><span class="params">(installed)</span> {</span>
+          <span class="comment">// do something            </span>
+        });
+      });
+    } <span class="keyword">else</span> {
+      errFn(<span class="string">'package '</span> + packageName + <span class="string">' not found'</span>);
+    }
+  });
+});
+</code></pre>
+<p>The <code>bower.commands</code> <code>search</code> and <code>install</code> are <code>EventEmitters</code> and in this example <code>install</code> is created inside an event handler of <code>search</code>. Using <code>domain</code> for error handling requires you to add all <code>EventEmitters</code> being used inside the <code>domain.run(function() {})</code> function to the domain <strong>before</strong> the run function gets set. <code>install</code> is created inside of <code>search.on(&#39;end&#39;,...</code> which in turn is executed in the outer <code>domain</code>. That means, <code>install</code> can’t be added to the outer domain anymore. It has to be used inside another <code>domain</code>. That’s why there is an inner <code>domain</code>.</p>
 </section>
         </article>
       </div>

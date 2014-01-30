@@ -3,7 +3,7 @@
     "url": "http://horsed.github.io",
     "name": "horsed.github.io",
     "owner": "Martin Knopf",
-    "description": ""
+    "description": "Tooling, learning"
   },
   "plugins": [
     "./plugins/paginator.coffee"
