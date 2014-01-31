@@ -1,8 +1,9 @@
 ---
-title: Binding function on two-way-databinding
+title: ngularJS learnings pt. 4
 author: martin
 date: 2013-11-15
 template: article.jade
+descr: Binding function on two-way-databinding
 ---
 The binding function used in e2e tests doesn't work as expected on a two-way-databinding.
 

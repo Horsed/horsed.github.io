@@ -1,11 +1,11 @@
 ---
-title: Using the URL fragment with Apache Wicket
+title: Extending Apache Wicket pt. 1
 author: martin
 date: 2013-06-08
 template: article.jade
+descr: Building bookmarkable Ajax components with Apache Wicket using the URL fragment
 ---
-Using the URL fragment with Apache Wicket"
-description: "Did you ever have had the need build bookmarkable Ajax components with Apache Wicket? Well, Wicket makes it easy to build Ajax components. But one thing they can't do out of the box is manipulating the URL so you can render state to it. And by manipulating the URL I mean writing something to the URL fragment, because that is the only part of the URL you can change with JavaScript whithout causing a page reload by the browser.
+Did you ever have had the need build bookmarkable Ajax components with Apache Wicket? Well, Wicket makes it easy to build Ajax components. But one thing they can't do out of the box is manipulating the URL so you can render state to it. And by manipulating the URL I mean writing something to the URL fragment, because that is the only part of the URL you can change with JavaScript whithout causing a page reload by the browser.
 
 With a little bit of JavaScript, making an *AjaxLink*, for example, changing the URL fragment isn't that hard. You could use the *AjaxRequestTarget* to execute the JavaScript, which handles the URL update:
 ```java

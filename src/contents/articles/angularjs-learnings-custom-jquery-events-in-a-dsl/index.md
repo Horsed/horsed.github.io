@@ -1,8 +1,9 @@
 ---
-title: Trigger jQuery events in a custom dsl
+title: AngularJS learnings pt. 6
 author: martin
 date: 2013-12-18
 template: article.jade
+descr: How to trigger jQuery events in a custom ngScenraio DSL
 ---
 When developing dynamic frontends with jQuery you will most likely be making use of events (e.g. mouseover). In AngularJS this event handling code usually lies in directives. When it comes to testing these directives in e2e tests, you may want to trigger some of these events. Angular uses it's jqLite for e2e test where you might be looking first for some events you can trigger. But since jqLite is only a subset of jquery it doesn't provide all events supported by jquery.
 

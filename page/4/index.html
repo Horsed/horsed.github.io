@@ -24,57 +24,18 @@
         <article class="article intro">
           <header>
             <p class="date"><span>09. June 2013</span></p>
-            <h2><a href="/articles/jquery-ui-tooltip-with-wicket/">Using jQuery UI tooltip with Apache Wicket</a></h2>
+            <h2><a href="/articles/jquery-ui-tooltip-with-wicket/">Extending Apache Wicket pt. 2</a></h2>
           </header>
-          <section class="content"><p>There are several integrations of tooltips based on JavaScript libraries in the wicketstuff sub project jWicket. I contributed jWicket-<span class="caps">UI</span>-Tooltip to it, an integration of the jQuery UI tooltip&nbsp;widget.</p>
-<p>You can find it <a href="https://github.com/wicketstuff/core/wiki/jWicket-UI-Tooltip">here</a>. The snapshot release is available through Maven like&nbsp;this:</p>
-<pre><code class="lang-xml"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.wicketstuff<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>wicketstuff-jwicket-ui-tooltip<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">version</span>&gt;</span>6.0-<span class="caps">SNAPSHOT</span><span class="tag">&lt;/<span class="title">version</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>
-</code></pre>
-
+          <section class="content">Using jQuery <span class="caps">UI</span> tooltip with Apache&nbsp;Wicket
             <p class="more"><a href="/articles/jquery-ui-tooltip-with-wicket/">more</a></p>
           </section>
         </article>
         <article class="article intro">
           <header>
             <p class="date"><span>08. June 2013</span></p>
-            <h2><a href="/articles/first/">Using the URL fragment with Apache Wicket</a></h2>
+            <h2><a href="/articles/first/">Extending Apache Wicket pt. 1</a></h2>
           </header>
-          <section class="content"><p>Using the <span class="caps">URL</span> fragment with Apache Wicket”
-description: “Did you ever have had the need build bookmarkable Ajax components with Apache Wicket? Well, Wicket makes it easy to build Ajax components. But one thing they can’t do out of the box is manipulating the URL so you can render state to it. And by manipulating the URL I mean writing something to the URL fragment, because that is the only part of the URL you can change with JavaScript whithout causing a page reload by the&nbsp;browser.</p>
-<p>With a little bit of JavaScript, making an <em>AjaxLink</em>, for example, changing the <span class="caps">URL</span> fragment isn’t that hard. You could use the <em>AjaxRequestTarget</em> to execute the JavaScript, which handles the <span class="caps">URL</span>&nbsp;update:</p>
-<pre><code class="lang-java">add(<span class="keyword">new</span> AjaxLink&lt;Void&gt;(<span class="string">"link"</span>) {
-  <span class="annotation">@Override</span>
-  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span>(AjaxRequestTarget target) {
-    <span class="comment">// handle click event</span>
-    target.appendJavascript(<span class="string">"window.location.hash='#!clickedAjaxLink';"</span>);
-  }
-});
-</code></pre>
-<p>That’s not too difficult, isn’t it? Well, that’s not a particularly difficult kind of state to render to the <span class="caps">URL</span>. What about rendering state with a key/value layout, e.g. <code>param1=value1&amp;param2=value2</code> or <code>param/value</code>? You could build URLs that look like this: <strong><a href="http://yoursite.com/#!/email/inbox">http://yoursite.com/#!/email/inbox</a></strong>.</p>
-<p>For this, you would need more JavaScript, because you would want to set/add/remove certain parameters, define constants for the delimiters&nbsp;etc.</p>
-<p>What about <strong>reading</strong> the <span class="caps">URL</span> fragment when a page gets requested with fragment state? Since the URL fragment doesn’t get sent to the server, you would have to read it after the initial page load and send it to the server (asynchronously). If you have components depending on this state, you would have to initialize them, when the fragment state&nbsp;arrives:</p>
-<pre><code class="lang-java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyHomePage</span> <span class="keyword">extends</span> <span class="title">AsyncUrlFragmentAwarePage</span> {</span>
-  <span class="keyword">public</span> <span class="title">MyHomePage</span>(PageParameters parameters) {
-    <span class="keyword">super</span>(parameters);
-    add(<span class="keyword">new</span> WebMarkupContainer(<span class="string">"content"</span>).setOutputMarkupId(<span class="keyword">true</span>));
-  }
-  <span class="annotation">@Override</span>
-  <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onParameterArrival</span>(IRequestParameters requestParameters,
-    AjaxRequestTarget target) {
-    <span class="comment">// content based on <span class="caps">URL</span> fragment state</span>
-    ContentPanel content = <span class="keyword">new</span> ContentPanel(<span class="string">"content"</span>, requestParameters);
-    content.setOutputMarkupId(<span class="keyword">true</span>);
-    MyHomePage.<span class="keyword">this</span>.replace(content);
-    target.add(content);
-  }
-}
-</code></pre>
-<p>I contributed the <a href="https://github.com/wicketstuff/core/wiki/UrlFragment">UrlFragment project</a> to <a href="http://wicketstuff.org/">wicketstuff</a>, which does all&nbsp;this.</p>
-
+          <section class="content">Building bookmarkable Ajax components with Apache Wicket using the <span class="caps">URL</span>&nbsp;fragment
           </section>
         </article>
       </div>

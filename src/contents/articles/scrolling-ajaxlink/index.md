@@ -1,8 +1,9 @@
 ---
-title: Wicket AjaxLink that should scroll the page to the top
+title: Scrolling AjaxLink
 author: martin
 date: 2013-07-01
 template: article.jade
+descr: Making an AjaxLink scroll top of the page
 ---
 I recently came across a browser quirk: A Wicket AjaxLink was supposed to scroll the page to the top after it was clicked. But it didn't...
 

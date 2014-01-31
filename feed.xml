@@ -9,50 +9,19 @@
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
     <item>
-      <title>Fetching bower packages via a RESTful API</title>
+      <title>bowerproxy</title>
       <link>http://horsed.github.io/articles/introducing-bowerproxy/</link>
       <pubDate>Thu, 30 Jan 2014 01:00:00 +0100</pubDate>
       <guid isPermaLink="true">http://horsed.github.io/articles/introducing-bowerproxy/</guid>
       <author></author>
-      <description>&lt;p&gt;When starting to use &lt;a href=&quot;http://angularjs.org/&quot;&gt;AngularJS&lt;/a&gt; at work, I soon had to realize, that using &lt;a href=&quot;http://bower.io/&quot;&gt;Bower&lt;/a&gt; might not be an option. Bower fetches components from &lt;a href=&quot;https://github.com/&quot;&gt;GitHub&lt;/a&gt; with &lt;code&gt;SSH&lt;/code&gt;, which got blocked by the corporate proxy. If Bower was able to fetch with &lt;code&gt;HTTPS&lt;/code&gt;, everything would have been fine. Of course, easing the security restriction was not an option :-)&lt;br&gt;Instead of arguing about the proxy and why Bower didn’t seem to have a proxy configuration, I quickly hacked together a simple Node webapp to fetch Bower components with. It runs on &lt;a href=&quot;https://www.heroku.com/&quot;&gt;heroku&lt;/a&gt;. The idea was to &lt;code&gt;curl&lt;/code&gt; a component from that webapp, which then actually fetches the component via &lt;a href=&quot;http://bower.io/#programmatic-api&quot;&gt;Bower’s API&lt;/a&gt; and zips it. I curled and unziped via a shell script. Pretty simple. The only thing missing was automatically editing the &lt;code&gt;bower.json&lt;/code&gt;, which doesn’t seem too difficult.&lt;br&gt;The hardest part about that webapp was making it failsafe. The earliest versions crashed when Bower threw an error (like it does when you request a component that doesn’t exist) and I’m not sure why, but I wasn’t able to catch those errors. I learned about Node’s &lt;a href=&quot;http://nodejs.org/api/domain.html&quot;&gt;domain module&lt;/a&gt; which was kind of hard figure out at first but really helped with the error handling.&lt;br&gt;I’m not using the app today anymore, nor am I coding on it. It was just one of a few small projects I started to do something that is new and interesting at least for 2 or 3 evenings.&lt;br&gt;Anyway, here is some code about that tricky error handling with nested &lt;code&gt;domains&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; search = bower.commands.search(packageName, {});
-
-&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; d = domain.create();
-d.on(&lt;span class=&quot;string&quot;&gt;'error'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(err)&lt;/span&gt; {&lt;/span&gt;
-  errFn(err);
-});
-d.add(search);
-
-d.run(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-  search.on(&lt;span class=&quot;string&quot;&gt;'end'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(results)&lt;/span&gt; {&lt;/span&gt;
-    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(results.length &amp;gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;) {
-      &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; install = bower.commands.install(
-        packageName,
-        {save:&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;},
-        {cwd: &lt;span class=&quot;string&quot;&gt;&quot;output&quot;&lt;/span&gt;, directory: &lt;span class=&quot;string&quot;&gt;&quot;bower_components&quot;&lt;/span&gt;});
-
-      &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; d = domain.create();
-      d.on(&lt;span class=&quot;string&quot;&gt;'error'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(err)&lt;/span&gt; {&lt;/span&gt;
-        errFn(err);
-      });
-      d.add(install);
-
-      d.run(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-        install.on(&lt;span class=&quot;string&quot;&gt;'end'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(installed)&lt;/span&gt; {&lt;/span&gt;
-          &lt;span class=&quot;comment&quot;&gt;// do something            &lt;/span&gt;
-        });
-      });
-    } &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; {
-      errFn(&lt;span class=&quot;string&quot;&gt;'package '&lt;/span&gt; + packageName + &lt;span class=&quot;string&quot;&gt;' not found'&lt;/span&gt;);
-    }
-  });
-});
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;bower.commands&lt;/code&gt; &lt;code&gt;search&lt;/code&gt; and &lt;code&gt;install&lt;/code&gt; are &lt;code&gt;EventEmitters&lt;/code&gt; and in this example &lt;code&gt;install&lt;/code&gt; is created inside an event handler of &lt;code&gt;search&lt;/code&gt;. Using &lt;code&gt;domain&lt;/code&gt; for error handling requires you to add all &lt;code&gt;EventEmitters&lt;/code&gt; being used inside the &lt;code&gt;domain.run(function() {})&lt;/code&gt; function to the domain &lt;strong&gt;before&lt;/strong&gt; the run function gets set. &lt;code&gt;install&lt;/code&gt; is created inside of &lt;code&gt;search.on(&amp;#39;end&amp;#39;,...&lt;/code&gt; which in turn is executed in the outer &lt;code&gt;domain&lt;/code&gt;. That means, &lt;code&gt;install&lt;/code&gt; can’t be added to the outer domain anymore. It has to be used inside another &lt;code&gt;domain&lt;/code&gt;. That’s why there is an inner &lt;code&gt;domain&lt;/code&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;When starting to use &lt;a href=&quot;http://angularjs.org/&quot;&gt;AngularJS&lt;/a&gt; at work, I soon had to realize, that using &lt;a href=&quot;http://bower.io/&quot;&gt;Bower&lt;/a&gt; might not be an option. Bower fetches components from &lt;a href=&quot;https://github.com/&quot;&gt;GitHub&lt;/a&gt; with &lt;code&gt;SSH&lt;/code&gt;, which got blocked by the corporate proxy. If Bower was able to fetch with &lt;code&gt;HTTPS&lt;/code&gt;, everything would have been fine. Of course, easing the security restriction was not an option :-)&lt;/p&gt;
+&lt;p&gt;Instead of arguing about the proxy and why Bower didn’t seem to have a proxy configuration, I quickly hacked together a simple Node webapp to fetch Bower components with. It runs on &lt;a href=&quot;https://www.heroku.com/&quot;&gt;heroku&lt;/a&gt;. The idea was to &lt;code&gt;curl&lt;/code&gt; a component from that webapp, which then actually fetches the component via &lt;a href=&quot;http://bower.io/#programmatic-api&quot;&gt;Bower’s API&lt;/a&gt; and zips it. I curled and unziped via a shell script. Pretty simple. The only thing missing was automatically editing the &lt;code&gt;bower.json&lt;/code&gt;, which doesn’t seem too difficult.&lt;/p&gt;
+&lt;p&gt;The hardest part about that webapp was making it failsafe. The earliest versions crashed when Bower threw an error (like it does when you request a component that doesn’t exist) and I’m not sure why, but I wasn’t able to catch those errors. I learned about Node’s &lt;a href=&quot;http://nodejs.org/api/domain.html&quot;&gt;domain module&lt;/a&gt; which was kind of hard figure out at first but really helped with the error handling.&lt;/p&gt;
+&lt;p&gt;I’m not using the app today anymore, nor am I coding on it. It was just a small project I started to do something that is new and interesting at least for 2 or 3 evenings.&lt;/p&gt;
 </description>
     </item>
     <item>
-      <title>Trigger jQuery events in a custom dsl</title>
+      <title>AngularJS learnings pt. 6</title>
       <link>http://horsed.github.io/articles/angularjs-learnings-custom-jquery-events-in-a-dsl/</link>
       <pubDate>Wed, 18 Dec 2013 01:00:00 +0100</pubDate>
       <guid isPermaLink="true">http://horsed.github.io/articles/angularjs-learnings-custom-jquery-events-in-a-dsl/</guid>
@@ -98,7 +67,7 @@ it(&lt;span class=&quot;string&quot;&gt;'should show slave'&lt;/span&gt;, &lt;sp
 </description>
     </item>
     <item>
-      <title>Minification vs. Dependency Injection</title>
+      <title>AngularJS learnings pt. 5</title>
       <link>http://horsed.github.io/articles/angularjs-learnings-be-careful-using-ngmin/</link>
       <pubDate>Tue, 19 Nov 2013 01:00:00 +0100</pubDate>
       <guid isPermaLink="true">http://horsed.github.io/articles/angularjs-learnings-be-careful-using-ngmin/</guid>
@@ -125,7 +94,7 @@ it(&lt;span class=&quot;string&quot;&gt;'should show slave'&lt;/span&gt;, &lt;sp
 </description>
     </item>
     <item>
-      <title>Binding function on two-way-databinding</title>
+      <title>ngularJS learnings pt. 4</title>
       <link>http://horsed.github.io/articles/angularjs-learnings-binding-funtion-with-two-way-databinding/</link>
       <pubDate>Fri, 15 Nov 2013 01:00:00 +0100</pubDate>
       <guid isPermaLink="true">http://horsed.github.io/articles/angularjs-learnings-binding-funtion-with-two-way-databinding/</guid>
@@ -135,7 +104,7 @@ it(&lt;span class=&quot;string&quot;&gt;'should show slave'&lt;/span&gt;, &lt;sp
 </description>
     </item>
     <item>
-      <title>Writing a custom Jasmine matcher for your e2e tests</title>
+      <title>AngularJS learnings pt. 3</title>
       <link>http://horsed.github.io/articles/angularjs-learnings-custom-jasmine-matchers-for-e2e-tests/</link>
       <pubDate>Sat, 02 Nov 2013 01:00:00 +0100</pubDate>
       <guid isPermaLink="true">http://horsed.github.io/articles/angularjs-learnings-custom-jasmine-matchers-for-e2e-tests/</guid>
@@ -150,7 +119,7 @@ it(&lt;span class=&quot;string&quot;&gt;'should show slave'&lt;/span&gt;, &lt;sp
 </description>
     </item>
     <item>
-      <title>Two-way-databinding automatically creates a model if it does not exist</title>
+      <title>AngularJS learnings pt. 2</title>
       <link>http://horsed.github.io/articles/angularjs-learnings-two-way-databinding-creates-model/</link>
       <pubDate>Sat, 28 Sep 2013 02:00:00 +0200</pubDate>
       <guid isPermaLink="true">http://horsed.github.io/articles/angularjs-learnings-two-way-databinding-creates-model/</guid>
@@ -214,7 +183,7 @@ Now users can switch to a desktop layout by clicking the corresponding link. Wit
 </description>
     </item>
     <item>
-      <title>Wicket AjaxLink that should scroll the page to the top</title>
+      <title>Scrolling AjaxLink</title>
       <link>http://horsed.github.io/articles/scrolling-ajaxlink/</link>
       <pubDate>Mon, 01 Jul 2013 02:00:00 +0200</pubDate>
       <guid isPermaLink="true">http://horsed.github.io/articles/scrolling-ajaxlink/</guid>
@@ -242,7 +211,7 @@ I played around with the &lt;i&gt;duration&lt;/i&gt; option of the &lt;i&gt;anim
 </description>
     </item>
     <item>
-      <title>Using jQuery UI tooltip with Apache Wicket</title>
+      <title>Extending Apache Wicket pt. 2</title>
       <link>http://horsed.github.io/articles/jquery-ui-tooltip-with-wicket/</link>
       <pubDate>Sun, 09 Jun 2013 02:00:00 +0200</pubDate>
       <guid isPermaLink="true">http://horsed.github.io/articles/jquery-ui-tooltip-with-wicket/</guid>
@@ -308,13 +277,12 @@ page.add(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Label(&lt;span c
 </description>
     </item>
     <item>
-      <title>Using the URL fragment with Apache Wicket</title>
+      <title>Extending Apache Wicket pt. 1</title>
       <link>http://horsed.github.io/articles/first/</link>
       <pubDate>Sat, 08 Jun 2013 02:00:00 +0200</pubDate>
       <guid isPermaLink="true">http://horsed.github.io/articles/first/</guid>
       <author></author>
-      <description>&lt;p&gt;Using the URL fragment with Apache Wicket”
-description: “Did you ever have had the need build bookmarkable Ajax components with Apache Wicket? Well, Wicket makes it easy to build Ajax components. But one thing they can’t do out of the box is manipulating the URL so you can render state to it. And by manipulating the URL I mean writing something to the URL fragment, because that is the only part of the URL you can change with JavaScript whithout causing a page reload by the browser.&lt;/p&gt;
+      <description>&lt;p&gt;Did you ever have had the need build bookmarkable Ajax components with Apache Wicket? Well, Wicket makes it easy to build Ajax components. But one thing they can’t do out of the box is manipulating the URL so you can render state to it. And by manipulating the URL I mean writing something to the URL fragment, because that is the only part of the URL you can change with JavaScript whithout causing a page reload by the browser.&lt;/p&gt;
 &lt;p&gt;With a little bit of JavaScript, making an &lt;em&gt;AjaxLink&lt;/em&gt;, for example, changing the URL fragment isn’t that hard. You could use the &lt;em&gt;AjaxRequestTarget&lt;/em&gt; to execute the JavaScript, which handles the URL update:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;lang-java&quot;&gt;add(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; AjaxLink&amp;lt;Void&amp;gt;(&lt;span class=&quot;string&quot;&gt;&quot;link&quot;&lt;/span&gt;) {
   &lt;span class=&quot;annotation&quot;&gt;@Override&lt;/span&gt;

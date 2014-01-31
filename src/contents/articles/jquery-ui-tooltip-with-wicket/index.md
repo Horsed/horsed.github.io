@@ -1,8 +1,9 @@
 ---
-title: Using jQuery UI tooltip with Apache Wicket
+title: Extending Apache Wicket pt. 2
 author: martin
 date: 2013-06-09
 template: article.jade
+descr: Using jQuery UI tooltip with Apache Wicket
 ---
 There are several integrations of tooltips based on JavaScript libraries in the wicketstuff sub project jWicket. I contributed jWicket-UI-Tooltip to it, an integration of the jQuery UI tooltip widget.
 

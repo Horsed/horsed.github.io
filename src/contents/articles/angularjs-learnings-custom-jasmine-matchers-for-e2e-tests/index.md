@@ -1,8 +1,9 @@
 ---
-title: Writing a custom Jasmine matcher for your e2e tests
+title: AngularJS learnings pt. 3
 author: martin
 date: 2013-11-02
 template: article.jade
+descr: Writing a custom Jasmine matcher for your e2e tests
 ---
 How to write a custom Jasmine matcher for yout AngularJS e2e tests
 

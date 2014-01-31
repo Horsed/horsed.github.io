@@ -1,8 +1,9 @@
 ---
-title: Minification vs. Dependency Injection
+title: AngularJS learnings pt. 5
 author: martin
 date: 2013-11-19
 template: article.jade
+descr: Minification vs. Dependency Injection
 ---
 AngularJS brings Dependency Injection into your app. But if you apply minification during your build process, you have to take care of not breaking your DI.
 

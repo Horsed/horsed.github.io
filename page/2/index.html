@@ -24,43 +24,25 @@
         <article class="article intro">
           <header>
             <p class="date"><span>15. November 2013</span></p>
-            <h2><a href="/articles/angularjs-learnings-binding-funtion-with-two-way-databinding/">Binding function on two-way-databinding</a></h2>
+            <h2><a href="/articles/angularjs-learnings-binding-funtion-with-two-way-databinding/">ngularJS learnings pt. 4</a></h2>
           </header>
-          <section class="content"><p>The binding function used in e2e tests doesn’t work as expected on a&nbsp;two-way-databinding.</p>
-<p>Calling <code>binding()</code> on a two-way-databinding (like <code>ng-model=&quot;binding-name&quot;</code>) throws an error message that says <code>Binding selector &#39;binding-name&#39; did not match.</code>. I don’t know the reason. Maybe I’ll get an explanation on my <a href="http://stackoverflow.com/questions/18630723/why-doesnt-binding-find-a-two-way-binding-in-an-e2e-test">stackoverflow question</a>.</p>
-
+          <section class="content">Binding function on&nbsp;two-way-databinding
           </section>
         </article>
         <article class="article intro">
           <header>
             <p class="date"><span>02. November 2013</span></p>
-            <h2><a href="/articles/angularjs-learnings-custom-jasmine-matchers-for-e2e-tests/">Writing a custom Jasmine matcher for your e2e tests</a></h2>
+            <h2><a href="/articles/angularjs-learnings-custom-jasmine-matchers-for-e2e-tests/">AngularJS learnings pt. 3</a></h2>
           </header>
-          <section class="content"><p>How to write a custom Jasmine matcher for yout AngularJS e2e&nbsp;tests</p>
-<p>Writing custom matchers in e2e tests differs from the standard <a href="https://github.com/pivotal/jasmine/wiki/Matchers#writing-new-matchers">Jasmine way</a>.</p>
-<pre><code class="lang-javascript">angular.scenario.matcher(<span class="string">'toBeReallyReallyTrue'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-  <span class="keyword">return</span> <span class="keyword">this</span>.actual === <span class="literal">true</span>;
-});
-</code></pre>
-<p>You can read more about this <a href="https://groups.google.com/forum/#!msg/angular/lcFXW8uv_P8/3gekqCrzSnEJ">here</a>.</p>
-
+          <section class="content">Writing a custom Jasmine matcher for your e2e&nbsp;tests
           </section>
         </article>
         <article class="article intro">
           <header>
             <p class="date"><span>28. September 2013</span></p>
-            <h2><a href="/articles/angularjs-learnings-two-way-databinding-creates-model/">Two-way-databinding automatically creates a model if it does not exist</a></h2>
+            <h2><a href="/articles/angularjs-learnings-two-way-databinding-creates-model/">AngularJS learnings pt. 2</a></h2>
           </header>
-          <section class="content"><p>Did you know that a two-way-databinding will automatically create a model on the scope when you provide a non existing&nbsp;one?</p>
-<p>This is can be tricky, especially when&nbsp;debugging:</p>
-<pre><code class="lang-javascript">...
-$scope.firstname = <span class="string">'Alice'</span>;
-...
-</code></pre>
-<pre><code class="lang-html"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">ng-model</span>=<span class="value">"firstName"</span> /&gt;</span>
-</code></pre>
-<p>Notice that there is a typo in&nbsp;firstname/firstName.</p>
-
+          <section class="content">Two-way-databinding automatically creates a model if it does not&nbsp;exist
           </section>
         </article>
       </div>
