@@ -125,6 +125,14 @@ body.article-detail > header {
   margin-bottom: 3em;
 }
 
+body .content {
+  text-align: center;
+}
+
+body.article-detail .content {
+  text-align: left;
+}
+
 /* page footer */
 
 footer {
