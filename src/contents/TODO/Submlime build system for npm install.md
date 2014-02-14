@@ -13,4 +13,4 @@ descr: How to use Sublime's build system to execute npm install in your current 
 }
 
 ```
-* deleting ```npm-debug.log```
+* ```npm-debug.log```
