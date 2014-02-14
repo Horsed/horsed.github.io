@@ -11,6 +11,6 @@ descr: How to use Sublime's build system to execute npm install in your current 
   "working_dir": "${file_path}",
   "shell": true
 }
-
 ```
+* executes npm install in the directory of your currently opened file
 * ```npm-debug.log```
