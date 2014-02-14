@@ -3,7 +3,7 @@ title: Sublime build system for npm install
 author: martin
 date: 2014-01-31
 template: article.jade
-descr: How to execute npm install inside Sublime Text
+descr: How to use Sublime's build system to execute npm install in your current working directory
 ---
 ```js
 {
