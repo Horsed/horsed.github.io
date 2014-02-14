@@ -1,5 +1,5 @@
 ---
-title: npm install from Sublime Text
+title: Sublime build system for npm install
 author: martin
 date: 2014-01-31
 template: article.jade
