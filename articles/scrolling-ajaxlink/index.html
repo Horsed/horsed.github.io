@@ -4,37 +4,41 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
-    <title>Sublime build system for npm install - horsed.github.io
+    <title>Scrolling AjaxLink - horsed.github.io
     </title>
-    <link rel="alternate" href="http://horsed.github.io/feed.xml" type="application/rss+xml" title="Tooling, learning">
+    <link rel="alternate" href="http://horsed.github.io/feed.xml" type="application/rss+xml" title="my code adventures">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
     <link rel="stylesheet" href="/css/main.css">
   </head>
   <body class="article-detail">
     <header class="header">
       <div class="content-wrap">
-        <h1>Sublime build system for npm install</h1>
+        <h1>Scrolling AjaxLink</h1>
       </div>
     </header>
     <div id="content">
       <div class="content-wrap">
         <article class="article">
-          <section class="content"><p>I recently used Sublime Text’s build system to execute <code>npm install</code>. There is a nice overview of simple but powerful build systems <a href="http://addyosmani.com/blog/custom-sublime-text-build-systems-for-popular-tools-and-languages/">here</a> by <a href="https://twitter.com/addyosmani">@addyosmani</a>. My <code>npm</code> task is just as simple and looks like&nbsp;this:</p>
-<pre><code class="lang-js">{
-  <span class="string">"cmd"</span>: [<span class="string">"npm"</span>, <span class="string">"install"</span>],
-  <span class="string">"working_dir"</span>: <span class="string">"${file_path}"</span>,
-  <span class="string">"shell"</span>: <span class="literal">true</span>
-}
+          <section class="content"><p>I recently came across a browser quirk: A Wicket AjaxLink was supposed to scroll the page to the top after it was clicked. But it&nbsp;didn’t…</p>
+<p>Here is the&nbsp;code:</p>
+<pre><code class="lang-java">add(<span class="keyword">new</span> AjaxLink&lt;Void&gt;(<span class="string">"link"</span>) {
+  <span class="annotation">@Override</span>
+  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span>(AjaxRequestTarget target) {
+    <span class="comment">// handle click event</span>
+    target.appendJavaScript(<span class="string">"$('html, body').animate({scrollTop: 0}, 100);"</span>);
+  }
+});
 </code></pre>
-<p>This will execute <code>npm install</code> inside the directory of the currently open file. <span class="caps">NPM</span> will find the next <code>package.json</code> upwards your directory tree. Be aware that <span class="caps">NPM</span> errors will produce a <code>npm-debug.log</code> inside the directory it was used in. This could be&nbsp;annoying.</p>
-<p>If you want to execute <code>npm install</code> inside the currently open project directory you could set the <code>working_dir</code> to the&nbsp;following:</p>
-<pre><code class="lang-js">{
-  <span class="string">"cmd"</span>: [<span class="string">"npm"</span>, <span class="string">"install"</span>],
-  <span class="string">"working_dir"</span>: <span class="string">"${project_path}"</span>,
-  <span class="string">"shell"</span>: <span class="literal">true</span>
-}
+<pre><code class="lang-html"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">wicket:id</span>=<span class="value">"link"</span>&gt;</span>click me<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
 </code></pre>
-<p>Have fun&nbsp;npm-installing!</p>
+<p>If you don’t provide a href attribute, the anchor will be rendered with a href value of <i>#</i>:</p>
+<pre><code class="lang-html"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span>&gt;</span>click me<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+</code></pre>
+<p>Now the problem with this is, that if you click on that link (seen in <span class="caps">IE</span> 8, 9 and Firefox), the browser <strong>might</strong> not scroll to the top of the page but to the link (which was not what I wanted). I think this is due to a race condition based on the asynchronous parts of the <i>animate</i> method and other JavaScript snippets coming with the <span class="caps">AJAX</span> repsonse. It seems to me, that browsers differ in the execution timings of these snippets, especially when there are asynchronous parts involved.
+I played around with the <i>duration</i> option of the <i>animate</i> method and tried to delay it with jQuery’s <i>delay</i> method. This had different effects in different browsers, of course. The only thing that really helped me, was making the <i>AjaxLink</i> a <i>span</i> (or something other than an&nbsp;anchor):</p>
+<pre><code class="lang-html"><span class="tag">&lt;<span class="title">span</span> <span class="attribute">style</span>=<span class="value">"cursor:pointer;cursor:hand;"</span>&gt;</span>click me<span class="tag">&lt;/<span class="title">span</span>&gt;</span>
+</code></pre>
+<p>With this, no browser will try to jump anywhere and jQuery scrolls the page to the&nbsp;top.</p>
 </section>
         </article>
       </div>
@@ -42,8 +46,7 @@
     <footer>
       <div class="content-wrap">
         <div class="nav"><a href="/">« Full blog</a></div>
-        <section class="about"><p>I’m a web developer. This blog is about my learnings in web development. I like to build tools and apps to try out latest technologies ranging from frontend to backend.</p>
-
+        <section class="about">
         </section>
         <section class="copy">
           <p>&copy; 2014 Martin Knopf &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a>

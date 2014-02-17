@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <title>Sublime build system for npm install - horsed.github.io
     </title>
-    <link rel="alternate" href="http://horsed.github.io/feed.xml" type="application/rss+xml" title="Tooling, learning">
+    <link rel="alternate" href="http://horsed.github.io/feed.xml" type="application/rss+xml" title="my code adventures">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
     <link rel="stylesheet" href="/css/main.css">
   </head>
@@ -19,16 +19,22 @@
     <div id="content">
       <div class="content-wrap">
         <article class="article">
-          <section class="content"><pre><code class="lang-js">{
+          <section class="content"><p>I recently used Sublime Text’s build system to execute <code>npm install</code>. There is a nice overview of simple but powerful build systems <a href="http://addyosmani.com/blog/custom-sublime-text-build-systems-for-popular-tools-and-languages/">here</a> by <a href="https://twitter.com/addyosmani">@addyosmani</a>. My <code>npm</code> task is just as simple and looks like&nbsp;this:</p>
+<pre><code class="lang-js">{
   <span class="string">"cmd"</span>: [<span class="string">"npm"</span>, <span class="string">"install"</span>],
   <span class="string">"working_dir"</span>: <span class="string">"${file_path}"</span>,
   <span class="string">"shell"</span>: <span class="literal">true</span>
 }
 </code></pre>
-<ul>
-<li>executes npm install in the directory of your currently opened&nbsp;file</li>
-<li><code>npm-debug.log</code></li>
-</ul>
+<p>This will execute <code>npm install</code> inside the directory of the currently open file. <span class="caps">NPM</span> will find the next <code>package.json</code> upwards your directory tree. Be aware that <span class="caps">NPM</span> errors will produce a <code>npm-debug.log</code> inside the directory it was used in. This could be&nbsp;annoying.</p>
+<p>If you want to execute <code>npm install</code> inside the currently open project directory you could set the <code>working_dir</code> to the&nbsp;following:</p>
+<pre><code class="lang-js">{
+  <span class="string">"cmd"</span>: [<span class="string">"npm"</span>, <span class="string">"install"</span>],
+  <span class="string">"working_dir"</span>: <span class="string">"${project_path}"</span>,
+  <span class="string">"shell"</span>: <span class="literal">true</span>
+}
+</code></pre>
+<p>Have fun&nbsp;npm-installing!</p>
 </section>
         </article>
       </div>
@@ -36,8 +42,7 @@
     <footer>
       <div class="content-wrap">
         <div class="nav"><a href="/">« Full blog</a></div>
-        <section class="about"><p>I’m a web developer. This blog is about my learnings in web development. I like to build tools and apps to try out latest technologies ranging from frontend to backend.</p>
-
+        <section class="about">
         </section>
         <section class="copy">
           <p>&copy; 2014 Martin Knopf &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a>
