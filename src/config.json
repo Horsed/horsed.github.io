@@ -3,7 +3,7 @@
     "url": "http://horsed.github.io",
     "name": "horsed.github.io",
     "owner": "Martin Knopf",
-    "description": "Tooling, learning"
+    "description": "my code adventures"
   },
   "plugins": [
     "./plugins/paginator.coffee"
@@ -21,6 +21,6 @@
     "smartypants": true
   },
   "paginator": {
-    "perPage": 3
+    "perPage": 5
   }
 }

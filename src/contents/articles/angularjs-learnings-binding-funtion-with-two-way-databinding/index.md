@@ -1,5 +1,5 @@
 ---
-title: ngularJS learnings pt. 4
+title: AngularJS learnings pt. 4
 author: martin
 date: 2013-11-15
 template: article.jade

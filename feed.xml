@@ -5,9 +5,51 @@
     <atom:link href="http://horsed.github.io/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://horsed.github.io</link>
     <description>Tooling, learning</description>
-    <pubDate>Thu, 30 Jan 2014 01:00:00 +0100</pubDate>
+    <pubDate>Mon, 17 Feb 2014 01:00:00 +0100</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>Sublime build system for npm install</title>
+      <link>http://horsed.github.io/articles/scrolling-ajaxlink/</link>
+      <pubDate>Mon, 17 Feb 2014 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://horsed.github.io/articles/scrolling-ajaxlink/</guid>
+      <author></author>
+      <description>&lt;p&gt;I recently used Sublime Text’s build system to execute &lt;code&gt;npm install&lt;/code&gt;. There is a nice overview of simple but powerful build systems &lt;a href=&quot;http://addyosmani.com/blog/custom-sublime-text-build-systems-for-popular-tools-and-languages/&quot;&gt;here&lt;/a&gt; by &lt;a href=&quot;https://twitter.com/addyosmani&quot;&gt;@addyosmani&lt;/a&gt;. My &lt;code&gt;npm&lt;/code&gt; task is just as simple and looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-js&quot;&gt;{
+  &lt;span class=&quot;string&quot;&gt;&quot;cmd&quot;&lt;/span&gt;: [&lt;span class=&quot;string&quot;&gt;&quot;npm&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;install&quot;&lt;/span&gt;],
+  &lt;span class=&quot;string&quot;&gt;&quot;working_dir&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;${file_path}&quot;&lt;/span&gt;,
+  &lt;span class=&quot;string&quot;&gt;&quot;shell&quot;&lt;/span&gt;: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will execute &lt;code&gt;npm install&lt;/code&gt; inside the directory of the currently open file. NPM will find the next &lt;code&gt;package.json&lt;/code&gt; upwards your directory tree. Be aware that NPM errors will produce a &lt;code&gt;npm-debug.log&lt;/code&gt; inside the directory it was used in. This could be annoying.&lt;/p&gt;
+&lt;p&gt;If you want to execute &lt;code&gt;npm install&lt;/code&gt; inside the currently open project directory you could set the &lt;code&gt;working_dir&lt;/code&gt; to the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-js&quot;&gt;{
+  &lt;span class=&quot;string&quot;&gt;&quot;cmd&quot;&lt;/span&gt;: [&lt;span class=&quot;string&quot;&gt;&quot;npm&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;install&quot;&lt;/span&gt;],
+  &lt;span class=&quot;string&quot;&gt;&quot;working_dir&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;${project_path}&quot;&lt;/span&gt;,
+  &lt;span class=&quot;string&quot;&gt;&quot;shell&quot;&lt;/span&gt;: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Have fun npm-installing!&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Sublime build system for npm install</title>
+      <link>http://horsed.github.io/articles/sublime-build-system-for-npm-install/</link>
+      <pubDate>Fri, 14 Feb 2014 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://horsed.github.io/articles/sublime-build-system-for-npm-install/</guid>
+      <author></author>
+      <description>&lt;pre&gt;&lt;code class=&quot;lang-js&quot;&gt;{
+  &lt;span class=&quot;string&quot;&gt;&quot;cmd&quot;&lt;/span&gt;: [&lt;span class=&quot;string&quot;&gt;&quot;npm&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;install&quot;&lt;/span&gt;],
+  &lt;span class=&quot;string&quot;&gt;&quot;working_dir&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;${file_path}&quot;&lt;/span&gt;,
+  &lt;span class=&quot;string&quot;&gt;&quot;shell&quot;&lt;/span&gt;: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;executes npm install in the directory of your currently opened file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm-debug.log&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     <item>
       <title>bowerproxy</title>
       <link>http://horsed.github.io/articles/introducing-bowerproxy/</link>
@@ -180,34 +222,6 @@ Consider the following responsive CSS snippet:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The click handler removes the CSS class &lt;code&gt;flexible&lt;/code&gt; from all elements with the CSS class &lt;code&gt;f&lt;/code&gt;. &lt;code&gt;f&lt;/code&gt; is a marker for all elements that need to be considered for the responsiveness.
 Now users can switch to a desktop layout by clicking the corresponding link. With a little more jQuery the link could even toggle back &lt;code&gt;flexible&lt;/code&gt;. One could furthermore save the state in the URL fragment or in a cookies, so the user doesn’t switch back to the flexible layout by reloading the page.&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>Scrolling AjaxLink</title>
-      <link>http://horsed.github.io/articles/scrolling-ajaxlink/</link>
-      <pubDate>Mon, 01 Jul 2013 02:00:00 +0200</pubDate>
-      <guid isPermaLink="true">http://horsed.github.io/articles/scrolling-ajaxlink/</guid>
-      <author></author>
-      <description>&lt;p&gt;I recently came across a browser quirk: A Wicket AjaxLink was supposed to scroll the page to the top after it was clicked. But it didn’t…&lt;/p&gt;
-&lt;p&gt;Here is the code:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-java&quot;&gt;add(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; AjaxLink&amp;lt;Void&amp;gt;(&lt;span class=&quot;string&quot;&gt;&quot;link&quot;&lt;/span&gt;) {
-  &lt;span class=&quot;annotation&quot;&gt;@Override&lt;/span&gt;
-  &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onClick&lt;/span&gt;(AjaxRequestTarget target) {
-    &lt;span class=&quot;comment&quot;&gt;// handle click event&lt;/span&gt;
-    target.appendJavaScript(&lt;span class=&quot;string&quot;&gt;&quot;$('html, body').animate({scrollTop: 0}, 100);&quot;&lt;/span&gt;);
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-html&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;wicket:id&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;link&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;click me&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don’t provide a href attribute, the anchor will be rendered with a href value of &lt;i&gt;#&lt;/i&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-html&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;#&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;click me&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now the problem with this is, that if you click on that link (seen in IE 8, 9 and Firefox), the browser &lt;strong&gt;might&lt;/strong&gt; not scroll to the top of the page but to the link (which was not what I wanted). I think this is due to a race condition based on the asynchronous parts of the &lt;i&gt;animate&lt;/i&gt; method and other JavaScript snippets coming with the AJAX repsonse. It seems to me, that browsers differ in the execution timings of these snippets, especially when there are asynchronous parts involved.
-I played around with the &lt;i&gt;duration&lt;/i&gt; option of the &lt;i&gt;animate&lt;/i&gt; method and tried to delay it with jQuery’s &lt;i&gt;delay&lt;/i&gt; method. This had different effects in different browsers, of course. The only thing that really helped me, was making the &lt;i&gt;AjaxLink&lt;/i&gt; a &lt;i&gt;span&lt;/i&gt; (or something other than an anchor):&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-html&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;span&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;cursor:pointer;cursor:hand;&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;click me&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With this, no browser will try to jump anywhere and jQuery scrolls the page to the top.&lt;/p&gt;
 </description>
     </item>
     <item>
