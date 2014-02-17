@@ -21,9 +21,13 @@
         <article class="article">
           <section class="content"><p>When starting to use <a href="http://angularjs.org/">AngularJS</a> at work, I soon had to realize, that using <a href="http://bower.io/">Bower</a> might not be an option. Bower fetches components from <a href="https://github.com/">GitHub</a> with <code>SSH</code>, which got blocked by the corporate proxy. If Bower was able to fetch with <code>HTTPS</code>, everything would have been fine. Of course, easing the security restriction was not an option&nbsp;:-)</p>
 <p>Instead of arguing about the proxy and why Bower didn’t seem to have a proxy configuration, I quickly hacked together a simple Node webapp to fetch Bower components with. It runs on <a href="https://www.heroku.com/">heroku</a>. The idea was to <code>curl</code> a component from that webapp, which then actually fetches the component via <a href="http://bower.io/#programmatic-api">Bower’s <span class="caps">API</span></a> and zips&nbsp;it:</p>
-<p><code>$ curl http://bowerproxy.herokuapp.com/install/lodash -O --proxy http://xxx:xxx --proxy-ntlm --proxy-user &#39;xxx:xxx&#39; &gt; lodash.zip</code></p>
+<pre><code class="lang-shell">$ curl http://bowerproxy.herokuapp.com/install/lodash -O /
+--proxy http://xxx:xxx --proxy-ntlm --proxy-user &#39;xxx:xxx&#39; &gt; lodash.zip
+</code></pre>
 <p>You can also specify the version&nbsp;number:</p>
-<p><code>$ curl http://bowerproxy.herokuapp.com/install/lodash/2.4.1 -O --proxy http://xxx:xxx --proxy-ntlm --proxy-user &#39;xxx:xxx&#39; &gt; lodash.zip</code></p>
+<pre><code class="lang-shell">$ curl http://bowerproxy.herokuapp.com/install/lodash/2.4.1 -O /
+--proxy http://xxx:xxx --proxy-ntlm --proxy-user &#39;xxx:xxx&#39; &gt; lodash.zip
+</code></pre>
 <p>The only thing missing is automatically editing a <code>bower.json</code> in the working&nbsp;directory.</p>
 <p>The hardest part about that webapp was making it failsafe. The earliest versions crashed when Bower threw an error (like it does when you request a component that doesn’t exist) and I’m not sure why, but I wasn’t able to catch those errors. I learned about Node’s <a href="http://nodejs.org/api/domain.html">domain module</a> which was kind of hard figure out at first but really helped with the error&nbsp;handling.</p>
 <p>I’m not using the app today anymore, nor am I coding on it. It was just a small project I started to do something that is new and interesting at least for 2 or 3&nbsp;evenings.</p>

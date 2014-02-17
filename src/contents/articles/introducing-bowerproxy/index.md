@@ -9,11 +9,17 @@ When starting to use [AngularJS](http://angularjs.org/) at work, I soon had to r
 
 Instead of arguing about the proxy and why Bower didn't seem to have a proxy configuration, I quickly hacked together a simple Node webapp to fetch Bower components with. It runs on [heroku](https://www.heroku.com/). The idea was to ```curl``` a component from that webapp, which then actually fetches the component via [Bower's API](http://bower.io/#programmatic-api) and zips it:
 
-```$ curl http://bowerproxy.herokuapp.com/install/lodash -O --proxy http://xxx:xxx --proxy-ntlm --proxy-user 'xxx:xxx' > lodash.zip```
+```shell
+$ curl http://bowerproxy.herokuapp.com/install/lodash -O /
+--proxy http://xxx:xxx --proxy-ntlm --proxy-user 'xxx:xxx' > lodash.zip
+```
 
 You can also specify the version number:
 
-```$ curl http://bowerproxy.herokuapp.com/install/lodash/2.4.1 -O --proxy http://xxx:xxx --proxy-ntlm --proxy-user 'xxx:xxx' > lodash.zip```
+```shell
+$ curl http://bowerproxy.herokuapp.com/install/lodash/2.4.1 -O /
+--proxy http://xxx:xxx --proxy-ntlm --proxy-user 'xxx:xxx' > lodash.zip
+```
 
 The only thing missing is automatically editing a ```bower.json``` in the working directory.
 
