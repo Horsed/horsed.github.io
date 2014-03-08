@@ -27,7 +27,8 @@
 </code></pre>
 <p>Consider the following CSS rules:</p>
 <pre><code class="lang-css"><span class="class">.container</span> <span class="rules">{  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">820</span>px</span></span>;  <span class="rule">}</span></span>
-<span class="at_rule">@<span class="keyword">media</span> only screen and (max-width: <span class="number">820</span>px) </span>{  <span class="class">.fluid</span> <span class="class">.container</span> <span class="rules">{  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100</span>%</span></span>;  <span class="rule">}</span></span>
+<span class="at_rule">@<span class="keyword">media</span> only screen and (max-width: <span class="number">820</span>px) </span>{
+  <span class="class">.fluid</span> <span class="class">.container</span> <span class="rules">{  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100</span>%</span></span>;  <span class="rule">}</span></span>
 }
 </code></pre>
 <p>For this example, switching the layout means removing the <code>.fluid</code> class with a little bit of JavaScript/jQuery:</p>
