@@ -19,25 +19,26 @@
     <div id="content">
       <div class="content-wrap">
         <article class="article">
-          <section class="content"><p>Implementing a responsive layout means dealing with multiple screen resolutions and devices in order to provide users an optimal viewing experience. However, it's common to link to the desktop version of a page if it doesn't provide a complete and mobile friendly layout. While this might be OK for stateless pages, it would definitely be a showstopper in some stateful use cases.</p>
-<p>Switching between desktop and mobile layouts dynamically without a page reload can be achieved by simply using a conditional CSS class on a top element like <code>body</code>:</p>
+          <section class="content"><p>Implementing a responsive layout means dealing with multiple screen resolutions and devices in order to provide users an optimal viewing experience. However, it’s common to link to the desktop version of a page if it doesn’t provide a complete and mobile friendly layout. While this might be <span class="caps">OK</span> for stateless pages, it would definitely be a showstopper in some stateful use&nbsp;cases.</p>
+<p>Switching between desktop and mobile layouts dynamically without a page reload can be achieved by simply using a conditional <span class="caps">CSS</span> class on a top element like <code>body</code>:</p>
 <pre><code class="lang-html"><span class="tag">&lt;<span class="title">body</span> <span class="attribute">class</span>=<span class="value">"fluid"</span>&gt;</span>
   <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"container"</span>&gt;</span>lorem ipsum...<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">body</span>&gt;</span>
 </code></pre>
-<p>Consider the following CSS rules:</p>
-<pre><code class="lang-css"><span class="class">.container</span> <span class="rules">{  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">820</span>px</span></span>;  <span class="rule">}</span></span>
-<span class="at_rule">@<span class="keyword">media</span> only screen and (max-width: <span class="number">820</span>px) </span>{
-  <span class="class">.fluid</span> <span class="class">.container</span> <span class="rules">{  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100</span>%</span></span>;  <span class="rule">}</span></span>
+<p>Consider the following <span class="caps">CSS</span>&nbsp;rules:</p>
+<pre><code class="lang-css">.container { width: 820px; }               // fixed-width layout
+
+@media only screen and (max-width: 820px) {
+  .fluid .container { width: 100%; }       // fluid layout
 }
 </code></pre>
-<p>For this example, switching the layout means removing the <code>.fluid</code> class with a little bit of JavaScript/jQuery:</p>
+<p>For this example, switching the layout means removing the <code>.fluid</code> class with a little bit of&nbsp;JavaScript/jQuery:</p>
 <pre><code class="lang-javascript">$(<span class="string">'#link-to-desktop-version'</span>).click(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
   $(<span class="string">'body'</span>).removeClass(<span class="string">'fluid'</span>);
 });
 </code></pre>
 <p>This enables users to switch to a fixed-width layout by clicking the corresponding link. With a little more jQuery the link could even toggle back <code>.fluid</code>.</p>
-<p>The layout state could even be saved in the URL fragment or in a cookie, so the user won't switch back to the fluid layout by reloading the page.</p>
+<p>The layout state could even be saved in the <span class="caps">URL</span> fragment or in a cookie, so the user won’t switch back to the fluid layout by reloading the&nbsp;page.</p>
 </section>
         </article>
       </div>
